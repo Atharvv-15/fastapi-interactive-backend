@@ -2,10 +2,13 @@
 venv/lib
 venv/include
 venv/lib
+fresh_venv/
 env/
+__pycache__/
+
 
 # Python cache files
-__pycache__/
+__pycache__
 *.pyc
 *.pyo
 *.pyd
