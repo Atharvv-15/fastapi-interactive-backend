@@ -37,7 +37,7 @@ app.include_router(vote.router)
 #Root route
 @app.get("/")
 def read_root():
-    return {"message": "Learning python"}
+    return {"message": "Learning python API with FastAPI !!!!"}
 
 
 
