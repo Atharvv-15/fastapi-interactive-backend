@@ -1,0 +1,43 @@
+services:
+  app:
+    image: atharvak1520/fastapi
+    ports:
+      - 80:8000
+    # env_file:
+    #   - ./.env
+    environment:
+      # - DATABASE_HOSTNAME=postgres
+      # - DATABASE_PORT=5432
+      # - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      # - DATABASE_NAME=${POSTGRES_DB}
+      # - DATABASE_USERNAME=${POSTGRES_USER}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_HOST=${POSTGRES_HOST}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - SECRET_KEY=${SECRET_KEY}
+      - SQLALCHEMY_DATABASE_URL=${SQLALCHEMY_DATABASE_URL}
+    depends_on:
+      - postgres
+
+    #Can commment this as we are using the default command which is specified in the Dockerfile
+    # command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_PASSWORD=0142  # Map to same variable
+      - POSTGRES_DB=fastapi-DB 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+
+

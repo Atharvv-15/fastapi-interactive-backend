@@ -10,9 +10,16 @@ from fastapi.middleware.cors import CORSMiddleware
 #This is done by alembic automatically, but we can also do it manually like this ,so for now we will not use it9:
 # models.Base.metadata.create_all(bind=engine)
 
+# Explicitly initialize models in correct order
+from .models import User, Post, Vote
+
 app = FastAPI()
 
 origins = ["*"]
+
+# Force model registration before setting up middleware and routers
+# Add this line to reflect existing tables
+# models.Base.metadata.create_all(bind=engine) 
 
 app.add_middleware(
     CORSMiddleware,
@@ -22,11 +29,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-#Include the post router
-app.include_router(post.router)
-
 #Include the user router
 app.include_router(user.router)
+
+#Include the post router
+app.include_router(post.router)
 
 #Include the auth router
 app.include_router(auth.router)
@@ -37,7 +44,7 @@ app.include_router(vote.router)
 #Root route
 @app.get("/")
 def read_root():
-    return {"message": "Learning python API with FastAPI !!!!"}
+    return {"message": "Learning python API"}
 
 
 

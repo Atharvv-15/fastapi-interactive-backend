@@ -1,0 +1,28 @@
+name: Build and Deploy Code
+
+#runner: github-hosted runner, a runner is a machine that runs your code
+
+#jobs: jobs are the tasks that are executed in the runner
+
+#steps: steps are the commands that are executed in the runner
+
+#runs-on: the machine that runs the code, can be ubuntu-latest, windows-latest, 
+#macos-latest, or all of them, right now we are using ubuntu-latest as our production environment is ubuntu
+
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: pulling git repo
+        uses: actions/checkout@v3
+      - name: Say hi to Atharva
+        run: echo "Hello, Atharva!"

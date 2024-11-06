@@ -1,0 +1,46 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    # env_file:
+    #   - ./.env
+    environment:
+      # - DATABASE_HOSTNAME=postgres
+      # - DATABASE_PORT=5432
+      # - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      # - DATABASE_NAME=${POSTGRES_DB}
+      # - DATABASE_USERNAME=${POSTGRES_USER}
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=0142
+      - POSTGRES_DB=fastapi-DB
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - SECRET_KEY=8fcedbda9a4794e0dfaac1e3c074a819577b75629c0db631efc09d6545506abe
+      - SQLALCHEMY_DATABASE_URL=postgresql://postgres:0142@postgres:5432/fastapi-DB
+    depends_on:
+      - postgres
+    #This is to mount the local directory to the container, so that we can see the changes in the local directory in the container
+    volumes:
+      - ./:/usr/src/app:ro
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+
+  postgres:
+    image: postgres:15
+    environment:
+      - POSTGRES_PASSWORD=0142
+      - POSTGRES_DB=fastapi-DB 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+
+

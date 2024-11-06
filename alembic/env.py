@@ -19,7 +19,10 @@ database_url = os.environ.get("SQLALCHEMY_DATABASE_URL")
 if database_url is None:
     raise ValueError("SQLALCHEMY_DATABASE_URL environment variable is not set")
     
-config.set_main_option("sqlalchemy.url", database_url)
+config.set_main_option(
+    "sqlalchemy.url", "postgresql://postgres:0142@localhost:5432/fastapi-DB"
+)
+# config.set_main_option("sqlalchemy.url", database_url)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
