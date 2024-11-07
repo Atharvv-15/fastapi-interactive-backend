@@ -20,6 +20,15 @@ on:
 
 jobs:
   job1:
+    env:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 0142
+      POSTGRES_DB: fastapi-DB
+      # POSTGRES_HOST: postgres
+      POSTGRES_HOST: localhost
+      POSTGRES_PORT: 5432
+      SECRET_KEY: 8fcedbda9a4794e0dfaac1e3c074a819577b75629c0db631efc09d6545506abe
+      SQLALCHEMY_DATABASE_URL: postgresql://postgres:0142@localhost:5432/fastapi-DB
     runs-on: ubuntu-latest
     steps:
       - name: pulling git repo
