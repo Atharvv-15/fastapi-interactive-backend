@@ -5,7 +5,7 @@ def test_root(client):
     response = client.get("/")
     print(response.json())
     assert response.status_code == 200
-    assert response.json().get("message") == "Learning python API"
+    assert response.json().get("message") == "Learning python API and Pushing the code to Ubuntu server"
 
 def test_create_user(client):
     response = client.post("/users/", json={"email": "hello123456@example.com", "password": "123456"})
