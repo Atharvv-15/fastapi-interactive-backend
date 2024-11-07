@@ -80,7 +80,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/fastapi-app:latest
+          tags: ${{ secrets.DOCKER_HUB_USER }}/fastapi-app:latest
 
       
 
