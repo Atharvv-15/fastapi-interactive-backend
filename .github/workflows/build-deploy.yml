@@ -19,7 +19,7 @@ on:
       - main
 
 jobs:
-  job1:
+  build:
     environment: testing
     env:
       POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
@@ -88,7 +88,34 @@ jobs:
       - name: Image digest
         run: echo ${{ steps.build_build.outputs.digest }}
 
+  deploy:
+    environment: production
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy docker image
+        run: echo ${{ steps.build_build.outputs.digest }}
 
+    name: remote ssh command
+    on: [push]
+    jobs:
+
+      build:
+        name: Build
+        runs-on: ubuntu-latest
+        steps:
+        - name: executing remote ssh commands using password
+          uses: appleboy/ssh-action@v1.1.0
+          with:
+            host: ${{ secrets.PROD_HOST }}
+            username: ${{ secrets.PROD_USERNAME }}
+            password: ${{ secrets.PROD_PASSWORD }}
+            script: |
+              cd app/src
+              git pull
+              echo ${{ secrets.PROD_PASSWORD }} | sudo -S systemctl restart fastapi
+
+    
       
 
        

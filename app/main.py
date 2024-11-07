@@ -44,7 +44,7 @@ app.include_router(vote.router)
 #Root route
 @app.get("/")
 def read_root():
-    return {"message": "Learning python API"}
+    return {"message": "Learning python API and Pushing the code to Ubuntu server"}
 
 
 
