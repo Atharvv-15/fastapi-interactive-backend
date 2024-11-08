@@ -1,4 +1,4 @@
-# FastAPI Backend Application
+# social-media-fastapi
 
 A robust REST API built with FastAPI, featuring user authentication, PostgreSQL integration, and containerized deployment.
 
