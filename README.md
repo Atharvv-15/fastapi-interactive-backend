@@ -10,6 +10,10 @@ A robust REST API built with FastAPI, featuring user authentication, PostgreSQL 
 - Docker containerization
 - Automated testing with pytest
 - CI/CD pipeline with GitHub Actions
+- Production deployment on Ubuntu VM
+- Custom domain configuration (atharva.my)
+- SSL/TLS encryption with Let's Encrypt
+- HTTPS-only secure access
 
 ## Tech Stack
 
@@ -20,12 +24,27 @@ A robust REST API built with FastAPI, featuring user authentication, PostgreSQL 
 - pytest (for testing)
 - Docker
 - GitHub Actions
+- Gunicorn (WSGI HTTP Server)
+- Nginx (Reverse Proxy)
+- Ubuntu Server (VM)
+- Certbot (SSL/TLS certificates)
+- Let's Encrypt (Certificate Authority)
+- Custom Domain (atharva.my)
 
 ## Prerequisites
 
 - Python 3.8+
 - PostgreSQL
 - Docker (optional)
+
+## Production Deployment
+
+### Server Requirements
+- Ubuntu Server
+- Python 3.8+
+- PostgreSQL
+- Nginx
+- Gunicorn
 
 ## Local Development Setup
 
